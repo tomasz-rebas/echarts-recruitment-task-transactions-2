@@ -25,7 +25,7 @@ export const Chart = ({ dataset }: Props) => {
     },
     series: [
       {
-        type: "bar",
+        type: "line",
         data: prices,
       },
     ],
