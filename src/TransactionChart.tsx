@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { Chart } from "./Chart";
 import { Trade } from "./types";
 
+const API_URL = "https://api.binance.com/api/v3/trades?symbol=BTCUSDT";
+
 export const TransactionChart = () => {
   const [dataset, setDataset] = useState<Trade[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
-  const apiUrl = "https://api.binance.com/api/v3/trades?symbol=BTCUSDT";
-
   const fetchData = async () => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(API_URL);
 
       if (!response.ok) {
         throw new Error();
