@@ -9,7 +9,6 @@ export const Chart = ({ dataset }: Props) => {
   const prices = dataset.map((element) => Number(element.price));
   const lowestPrice = Math.min(...prices);
   const highestPrice = Math.max(...prices);
-  console.log(`${lowestPrice} - ${highestPrice}`);
 
   const option = {
     title: {

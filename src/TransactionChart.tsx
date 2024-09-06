@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Chart } from "./Chart";
-import { Trade } from "./types";
+import { ErrorResponse, Trade } from "./types";
 
 export const TransactionChart = () => {
   const [dataset, setDataset] = useState<Trade[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState<string>();
 
   const apiUrl = "https://api.binance.com/api/v3/trades?symbol=BTCUSDT";
 
@@ -23,7 +23,7 @@ export const TransactionChart = () => {
       setDataset(result);
       console.log("result", result);
     } catch (error) {
-      //setError(error);
+      //setError((error as ErrorResponse).msg);
     } finally {
       setIsLoading(false);
     }
@@ -43,7 +43,7 @@ export const TransactionChart = () => {
     return <h2>Loading...</h2>;
   }
 
-  if (error) {
+  if (error || dataset.length === 0) {
     return <h2>Error occurred. The chart cannot be displayed. {error}</h2>;
   }
 
