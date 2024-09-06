@@ -14,12 +14,17 @@ export const Chart = ({ dataset }: Props) => {
     title: {
       text: "Real-time transaction data for BTCUSDT",
     },
+    tooltip: {
+      show: true,
+    },
     xAxis: {
+      name: "Time",
       data: dataset.map((element) =>
         new Date(element.time).toLocaleTimeString()
       ),
     },
     yAxis: {
+      name: "Price (USD)",
       min: lowestPrice,
       max: highestPrice,
     },
