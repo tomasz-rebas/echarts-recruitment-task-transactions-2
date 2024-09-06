@@ -7,8 +7,3 @@ export interface Trade {
   isBuyerMaker: boolean;
   isBestMatch: boolean;
 }
-
-export interface ErrorResponse {
-  code: number;
-  msg: string;
-}

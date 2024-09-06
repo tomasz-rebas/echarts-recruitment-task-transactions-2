@@ -32,7 +32,7 @@ export const TransactionChart = () => {
 
     const refreshInterval = setInterval(() => {
       fetchData();
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(refreshInterval);
   }, []);
