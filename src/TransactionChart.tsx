@@ -5,7 +5,7 @@ import { Trade } from "./types";
 export const TransactionChart = () => {
   const [dataset, setDataset] = useState<Trade[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const apiUrl = "https://api.binance.com/api/v3/trades?symbol=BTCUSDT";
 
@@ -14,15 +14,14 @@ export const TransactionChart = () => {
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
-        throw new Error("Couldn't fetch the data");
+        throw new Error();
       }
 
       const result: Trade[] = await response.json();
 
       setDataset(result);
-      console.log("result", result);
     } catch (error) {
-      //setError((error as ErrorResponse).msg);
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
@@ -42,12 +41,12 @@ export const TransactionChart = () => {
     return <h2>Loading...</h2>;
   }
 
-  if (dataset.length === 0) {
-    return <h2>No data has been fetched. The chart cannot be displayed.</h2>;
+  if (isError) {
+    return <h2>Error occurred. The chart cannot be displayed.</h2>;
   }
 
-  if (error) {
-    return <h2>Error occurred. The chart cannot be displayed. {error}</h2>;
+  if (dataset.length === 0) {
+    return <h2>No data has been fetched. The chart cannot be displayed.</h2>;
   }
 
   return <Chart dataset={dataset} />;
